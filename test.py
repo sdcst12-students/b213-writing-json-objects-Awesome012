@@ -1,6 +1,7 @@
 #!python3
 
 import json
+import csv
 
 #f = open('data.csv','r')
 #data = f.read().strip()
@@ -10,11 +11,44 @@ import json
 #print(type(decoded))
 #print(decoded)
 
-import csv
+'''
+Test = {
+        0 = { 'name' = 'A1',
+              'scores' = [
+                    8,
+                    7,
+                    7,
+                    6,
+                    9.5
+                ],
+        1 = { 'name' = 'A2',
+              'scores' = [
+                    8,
+                    7,
+                    7,
+                    6,
+                    9.5
+                ],
+        2 = { 'name' = 'A3',
+              'scores' = [
+                    8,
+                    7,
+                    7,
+                    6,
+                    9.5
+                ],
 
-with open('data.csv', newline='') as x:
-    reader = csv.reader(x)
+}
+'''
+thisdict = {}
+
+with open('data.csv', 'r') as file:
+    reader = csv.reader(file)
     data = list(reader)
-
-print(data)
-print(type(data))
+    print(data[0][1])
+    test = []
+    for x in data:
+        number = x[0]
+        del x[0]
+        thisdict.update({number:x})
+    print(thisdict)
