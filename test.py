@@ -41,7 +41,7 @@ Test = {
 }
 '''
 thisdict = {}
-
+testNumber = 0
 with open('data.csv', 'r') as file:
     reader = csv.reader(file)
     data = list(reader)
@@ -50,5 +50,14 @@ with open('data.csv', 'r') as file:
     for x in data:
         number = x[0]
         del x[0]
-        thisdict.update({number:x})
+        thisdict.update({testNumber:{}})
+        thisdict[testNumber].update({"name":number})
+        thisdict[testNumber].update({"scores":x})
+        testNumber = testNumber + 1
     print(thisdict)
+
+json_object = json.dumps(thisdict) 
+tester = json.loads(json_object)
+print(tester['0']['name'])
+
+print(tester.keys()[0])
