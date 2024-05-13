@@ -56,8 +56,20 @@ with open('data.csv', 'r') as file:
         testNumber = testNumber + 1
     print(thisdict)
 
-json_object = json.dumps(thisdict) 
-tester = json.loads(json_object)
-print(tester['0']['name'])
+with open('data.csv', 'r') as file:
+    file = map(str, file)
+    line = "".join(file)
+    cool = str(line)
+    tester = json.dumps(cool)
+    awesome = json.loads(tester)
+    print(tester)
+    filename = "dbase.txt"
+    try:
+        file = open(filename,'w')
+        file.write(awesome)
+        print("Write complete")
+    except Exception as e:
+        print(f"An error occurred {e}")
 
-print(tester.keys()[0])
+
+print(awesome)
