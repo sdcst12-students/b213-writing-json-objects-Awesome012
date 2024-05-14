@@ -40,12 +40,46 @@ Test = {
 
 }
 '''
+Test = {
+        0 : { 'name' : 'A1',
+              'scores' : [
+                    8,
+                    7,
+                    7,
+                    6,
+                    9.5
+                ]
+        },
+        1 : { 'name' : 'A2',
+              'scores' : [
+                    8,
+                    7,
+                    7,
+                    6,
+                    9.5
+                ]
+        },
+        2 : { 'name' : 'A3',
+              'scores' : [
+                    8,
+                    7,
+                    7,
+                    6,
+                    9.5
+                ]
+        }
+
+}
+for x in Test:
+    print(x)
+
+
+
 thisdict = {}
 testNumber = 0
 with open('data.csv', 'r') as file:
     reader = csv.reader(file)
     data = list(reader)
-    print(data[0][1])
     test = []
     for x in data:
         number = x[0]

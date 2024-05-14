@@ -62,4 +62,28 @@ Enter in the scores for 10 students for Assignment 2:
 """
 
 import json
+def option1():
+    naming = input("Enter the assignment name: ")
+    
 
+def option2():
+    print("hey")
+
+def option3():
+    print("hello")
+
+def main():
+    print("1. Create an Assignment \n2. Enter in Assignment Scores \n3. Write your data to file")
+    choice = input("Enter in Your Choice: ")
+    if choice == "1":
+        option1()
+    elif choice == "2":
+        option2()
+    elif choice == "3":
+        option3()
+    else:
+        print("\ninvalid choice, try again:")
+        main()
+
+if __name__ == "__main__":
+    main()
