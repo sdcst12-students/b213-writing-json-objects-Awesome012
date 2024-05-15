@@ -62,9 +62,34 @@ Enter in the scores for 10 students for Assignment 2:
 """
 
 import json
+import csv
+
+thisdict = {}
+
+
 def option1():
     naming = input("Enter the assignment name: ")
-    
+    with open('data.csv', 'r') as file:
+        reader = csv.reader(file)
+        data = list(reader)
+        print(data)
+        test = []
+        for x in data:
+            if naming == x[1]:
+                overlap1()
+            else:
+                print("yo")
+
+def overlap1():
+    check = input("this assignment already exists, would you like to erase it? ")
+    if check == "yes":
+        print("hi")
+    elif check == "no":
+        main()
+    else:
+        print("\ninvalid answer, please type yes or no")
+        overlap1()
+                
 
 def option2():
     print("hey")
@@ -73,7 +98,7 @@ def option3():
     print("hello")
 
 def main():
-    print("1. Create an Assignment \n2. Enter in Assignment Scores \n3. Write your data to file")
+    print("\n1. Create an Assignment \n2. Enter in Assignment Scores \n3. Write your data to file")
     choice = input("Enter in Your Choice: ")
     if choice == "1":
         option1()
@@ -86,4 +111,4 @@ def main():
         main()
 
 if __name__ == "__main__":
-    main()
+    overlap1()
