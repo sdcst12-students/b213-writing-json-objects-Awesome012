@@ -65,31 +65,59 @@ import json
 import csv
 
 thisdict = {}
+testnumber = 0
 
+with open('data.csv', 'r') as file:
+    reader = csv.reader(file)
+    data = list(reader)
+    print(data)
+    try:
+        print(data[0][1])
+        for x in data:
+            number = x[0]
+            x.pop(0)
+            thisdict.update({testnumber:{}})
+            thisdict[testnumber].update({"name":x[0]})
+            x.pop(0)
+            thisdict[testnumber].update({"scores":x})
+            testnumber = testnumber + 1
+        tester = json.dumps(thisdict)
+        print(tester)
+
+    except:
+        print("")
 
 def option1():
+    global naming
     naming = input("Enter the assignment name: ")
-    with open('data.csv', 'r') as file:
-        reader = csv.reader(file)
-        data = list(reader)
-        print(data)
-        test = []
-        for x in data:
-            if naming == x[1]:
-                overlap1()
-            else:
-                print("yo")
+    for x in data:
+        if naming == x[1]:
+            overlap1()
+        else:
+            continue
 
 def overlap1():
+    global naming
     check = input("this assignment already exists, would you like to erase it? ")
     if check == "yes":
-        print("hi")
+        for x in data:
+            if naming == x[1]:
+                data.remove(x)
+                print(data)    
     elif check == "no":
         main()
     else:
         print("\ninvalid answer, please type yes or no")
         overlap1()
-                
+
+def makenew():
+    while True:
+        try:
+            print(data["1"])
+        except:
+            print("woah")
+        else:
+            print(data[0])
 
 def option2():
     print("hey")
@@ -111,4 +139,4 @@ def main():
         main()
 
 if __name__ == "__main__":
-    overlap1()
+    option1()

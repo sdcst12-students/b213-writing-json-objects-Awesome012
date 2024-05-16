@@ -49,7 +49,7 @@ for x in Test:
 
 
 thisdict = {}
-testNumber = 0
+testnumber = 0
 with open('data.csv', 'r') as file:
     reader = csv.reader(file)
     data = list(reader)
@@ -57,10 +57,10 @@ with open('data.csv', 'r') as file:
     for x in data:
         number = x[0]
         del x[0]
-        thisdict.update({testNumber:{}})
-        thisdict[testNumber].update({"name":number})
-        thisdict[testNumber].update({"scores":x})
-        testNumber = testNumber + 1
+        thisdict.update({testnumber:{}})
+        thisdict[testnumber].update({"name":number})
+        thisdict[testnumber].update({"scores":x})
+        testnumber = testnumber + 1
     print(thisdict)
 
 with open('data.csv', 'r') as file:
