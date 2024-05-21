@@ -66,6 +66,7 @@ import csv
 
 thisdict = {}
 testnumber = 0
+numberlist = []
 
 with open('data.csv', 'r') as file:
     reader = csv.reader(file)
@@ -75,6 +76,7 @@ with open('data.csv', 'r') as file:
         print(data[0][1])
         for x in data:
             number = x[0]
+            numberlist.append(number)
             x.pop(0)
             thisdict.update({testnumber:{}})
             thisdict[testnumber].update({"name":x[0]})
@@ -82,16 +84,18 @@ with open('data.csv', 'r') as file:
             thisdict[testnumber].update({"scores":x})
             testnumber = testnumber + 1
         tester = json.dumps(thisdict)
-        print(tester)
-
+        tester2 = json.loads(tester)
+        print(tester2)
     except:
         print("")
+print(numberlist)
 
 def option1():
     global naming
     naming = input("Enter the assignment name: ")
-    for x in data:
-        if naming == x[1]:
+    for x in tester2:
+        print(tester2[x]['name'])
+        if naming == tester2[x]['name']:
             overlap1()
         else:
             continue
@@ -100,10 +104,15 @@ def overlap1():
     global naming
     check = input("this assignment already exists, would you like to erase it? ")
     if check == "yes":
-        for x in data:
-            if naming == x[1]:
-                data.remove(x)
-                print(data)    
+        for x in tester2:
+            if naming == tester2[x]['name']:
+                print(tester2)
+                ok = x
+                continue
+            else:
+                print("hi")
+        del tester2[ok]
+        print(tester2)
     elif check == "no":
         main()
     else:
