@@ -71,9 +71,9 @@ numberlist = []
 with open('data.csv', 'r') as file:
     reader = csv.reader(file)
     data = list(reader)
-    print(data)
+    #print(data)
     try:
-        print(data[0][1])
+        #print(data[0][1])
         for x in data:
             number = x[0]
             numberlist.append(number)
@@ -83,9 +83,10 @@ with open('data.csv', 'r') as file:
             x.pop(0)
             thisdict[testnumber].update({"scores":x})
             testnumber = testnumber + 1
+            print(testnumber)
         tester = json.dumps(thisdict)
         tester2 = json.loads(tester)
-        print(tester2)
+        #print(tester2)
     except:
         print("")
 print(numberlist)
@@ -94,39 +95,53 @@ def option1():
     global naming
     naming = input("Enter the assignment name: ")
     for x in tester2:
-        print(tester2[x]['name'])
+        #print(tester2[x]['name'])
         if naming == tester2[x]['name']:
             overlap1()
+            break
         else:
             continue
+    makenew()
+
 
 def overlap1():
     global naming
+    global testnumber
     check = input("this assignment already exists, would you like to erase it? ")
     if check == "yes":
         for x in tester2:
             if naming == tester2[x]['name']:
-                print(tester2)
+                #print(tester2)
                 ok = x
                 continue
             else:
-                print("hi")
+                #print("hi")
+                continue
+        testnumber = ok
+        print(testnumber)
         del tester2[ok]
-        print(tester2)
+        #print(tester2)
     elif check == "no":
         main()
     else:
         print("\ninvalid answer, please type yes or no")
         overlap1()
+    print(testnumber)
+    makenew()
 
 def makenew():
-    while True:
-        try:
-            print(data["1"])
-        except:
-            print("woah")
-        else:
-            print(data[0])
+    global testnumber
+    makevalue = input("Enter in Assignment Value:")
+    try:
+        makevalue = int(makevalue)
+    except:
+        print("invalid input, try again:")
+        makenew()
+    makevalue = int(makevalue)
+    print(testnumber)
+    for x in range(makevalue):
+        print(x)
+    
 
 def option2():
     print("hey")
