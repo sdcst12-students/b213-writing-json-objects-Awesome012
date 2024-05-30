@@ -83,13 +83,13 @@ with open('data.csv', 'r') as file:
             x.pop(0)
             thisdict[testnumber].update({"scores":x})
             testnumber = testnumber + 1
-            print(testnumber)
+            #print(testnumber)
         tester = json.dumps(thisdict)
         tester2 = json.loads(tester)
         #print(tester2)
     except:
         print("")
-print(numberlist)
+#print(numberlist)
 
 def option1():
     global naming
@@ -118,7 +118,7 @@ def overlap1():
                 #print("hi")
                 continue
         testnumber = ok
-        print(testnumber)
+        #print(testnumber)
         del tester2[ok]
         #print(tester2)
     elif check == "no":
@@ -126,11 +126,14 @@ def overlap1():
     else:
         print("\ninvalid answer, please type yes or no")
         overlap1()
-    print(testnumber)
+    #print(testnumber)
     makenew()
 
 def makenew():
+    newlist = []
+    global naming
     global testnumber
+    global tester2
     makevalue = input("Enter in Assignment Value:")
     try:
         makevalue = int(makevalue)
@@ -138,13 +141,30 @@ def makenew():
         print("invalid input, try again:")
         makenew()
     makevalue = int(makevalue)
-    print(testnumber)
+    tester2.update({testnumber:{}})
+    #print(tester2)
+    tester2[testnumber].update({"name":naming})
+    print(f'Enter in the scores for {makevalue} students for {naming}:')
     for x in range(makevalue):
-        print(x)
-    
+        cool = x + 1
+        newvalue = input(f"{cool}: ")
+        newlist.append(newvalue)
+    #print(newlist)
+    tester2[testnumber].update({"scores":newlist})
+    #print(tester2)
+    jsonholder = json.dumps(tester2)
 
 def option2():
-    print("hey")
+    global tester2
+    asking = input("Enter in the assignment ID:")
+    for x in tester2:
+        letssee = x
+        print(letssee)
+        if asking == letssee:
+            print("HOORAY")
+        else:
+            print(x)
+    
 
 def option3():
     print("hello")
@@ -163,4 +183,4 @@ def main():
         main()
 
 if __name__ == "__main__":
-    option1()
+    option2()
