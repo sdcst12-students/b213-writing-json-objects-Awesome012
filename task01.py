@@ -76,9 +76,9 @@ with open('data.csv', 'r') as file:
         #print(data[0][1])
         for x in data:
             number = x[0]
-            numberlist.append(number)
-            x.pop(0)
             thisdict.update({testnumber:{}})
+            thisdict[testnumber].update({"value":number})
+            x.pop(0)
             thisdict[testnumber].update({"name":x[0]})
             x.pop(0)
             thisdict[testnumber].update({"scores":x})
@@ -86,10 +86,9 @@ with open('data.csv', 'r') as file:
             #print(testnumber)
         tester = json.dumps(thisdict)
         tester2 = json.loads(tester)
-        #print(tester2)
+        print(tester2)
     except:
         print("")
-#print(numberlist)
 
 def option1():
     global naming
@@ -98,7 +97,7 @@ def option1():
         #print(tester2[x]['name'])
         if naming == tester2[x]['name']:
             overlap1()
-            break
+            return
         else:
             continue
     makenew()
@@ -143,6 +142,7 @@ def makenew():
     makevalue = int(makevalue)
     tester2.update({testnumber:{}})
     #print(tester2)
+    tester2[testnumber].update({"value":makevalue})
     tester2[testnumber].update({"name":naming})
     print(f'Enter in the scores for {makevalue} students for {naming}:')
     for x in range(makevalue):
@@ -151,19 +151,29 @@ def makenew():
         newlist.append(newvalue)
     #print(newlist)
     tester2[testnumber].update({"scores":newlist})
-    #print(tester2)
+    print(tester2)
     jsonholder = json.dumps(tester2)
+    main()
 
 def option2():
     global tester2
+    newlist = []
     asking = input("Enter in the assignment ID:")
     for x in tester2:
         letssee = x
-        print(letssee)
         if asking == letssee:
-            print("HOORAY")
+            makevalue = tester2[x]['value']
+            makevalue = int(makevalue)
+            tester2[x].pop('scores')
+            for y in range(makevalue):
+                cool = y + 1
+                newvalue = input(f"{cool}: ")
+                newlist.append(newvalue)
+            tester2[x].update({"scores":newlist})
         else:
-            print(x)
+            continue
+    print(tester2)
+        
     
 
 def option3():
