@@ -86,9 +86,10 @@ with open('data.csv', 'r') as file:
             #print(testnumber)
         tester = json.dumps(thisdict)
         tester2 = json.loads(tester)
-        print(tester2)
+        #print(tester2)
     except:
         print("")
+    jsonholder = json.dumps(tester2)
 
 def option1():
     global naming
@@ -156,12 +157,14 @@ def makenew():
     main()
 
 def option2():
+    extra = False
     global tester2
     newlist = []
     asking = input("Enter in the assignment ID:")
     for x in tester2:
         letssee = x
         if asking == letssee:
+            extra = True
             makevalue = tester2[x]['value']
             makevalue = int(makevalue)
             tester2[x].pop('scores')
@@ -172,12 +175,32 @@ def option2():
             tester2[x].update({"scores":newlist})
         else:
             continue
-    print(tester2)
+    if extra == False:
+        print("that id does not exist")
+    main()
         
     
 
 def option3():
-    print("hello")
+    global tester2
+    tester2 = dict(sorted(tester2.items()))
+    print(tester2)
+    finallist = []
+    for x in tester2:
+        final = ""
+        print(tester2[x])
+        final = final + tester2[x]['value']
+        final = final + ',' + tester2[x]['name']
+        for y in tester2[x]['scores']:
+            final = final + ',' + y
+        print(final)
+        finallist.append(final)
+    print(finallist)
+    with open('data.csv', 'w') as csv_file:  
+        writer = csv.writer(csv_file)
+        for x in finallist:
+            print(x)
+            writer.writerow(x)
 
 def main():
     print("\n1. Create an Assignment \n2. Enter in Assignment Scores \n3. Write your data to file")
@@ -193,4 +216,4 @@ def main():
         main()
 
 if __name__ == "__main__":
-    option2()
+    option3()
