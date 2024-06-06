@@ -103,7 +103,6 @@ def option1():
             continue
     makenew()
 
-
 def overlap1():
     global naming
     global testnumber
@@ -178,11 +177,11 @@ def option2():
     if extra == False:
         print("that id does not exist")
     main()
-        
-    
 
 def option3():
     global tester2
+    for x in tester2:
+        x = str(x)
     tester2 = dict(sorted(tester2.items()))
     print(tester2)
     finallist = []
@@ -199,8 +198,9 @@ def option3():
     with open('data.csv', 'w') as csv_file:  
         writer = csv.writer(csv_file)
         for x in finallist:
+            csv_file.write(x)
+            csv_file.write('\n')
             print(x)
-            writer.writerow(x)
 
 def main():
     print("\n1. Create an Assignment \n2. Enter in Assignment Scores \n3. Write your data to file")
@@ -216,4 +216,4 @@ def main():
         main()
 
 if __name__ == "__main__":
-    option3()
+    main()
