@@ -91,70 +91,72 @@ with open('data.csv', 'r') as file:
         print("")
     jsonholder = json.dumps(tester2)
 
-def option1():
-    global naming
-    naming = input("Enter the assignment name: ")
-    for x in tester2:
-        #print(tester2[x]['name'])
-        if naming == tester2[x]['name']:
-            overlap1()
-            return
-        else:
-            continue
-    makenew()
+class maker:
+    
 
-
-def overlap1():
-    global naming
-    global testnumber
-    check = input("this assignment already exists, would you like to erase it? ")
-    if check == "yes":
+    def option1():
+        global naming
+        naming = input("Enter the assignment name: ")
         for x in tester2:
+            #print(tester2[x]['name'])
             if naming == tester2[x]['name']:
-                #print(tester2)
-                ok = x
-                continue
+                overlap1()
+                return
             else:
-                #print("hi")
                 continue
-        testnumber = ok
-        #print(testnumber)
-        del tester2[ok]
-        #print(tester2)
-    elif check == "no":
-        main()
-    else:
-        print("\ninvalid answer, please type yes or no")
-        overlap1()
-    #print(testnumber)
-    makenew()
-
-def makenew():
-    newlist = []
-    global naming
-    global testnumber
-    global tester2
-    makevalue = input("Enter in Assignment Value:")
-    try:
-        makevalue = int(makevalue)
-    except:
-        print("invalid input, try again:")
         makenew()
-    makevalue = int(makevalue)
-    tester2.update({testnumber:{}})
-    #print(tester2)
-    tester2[testnumber].update({"value":makevalue})
-    tester2[testnumber].update({"name":naming})
-    print(f'Enter in the scores for {makevalue} students for {naming}:')
-    for x in range(makevalue):
-        cool = x + 1
-        newvalue = input(f"{cool}: ")
-        newlist.append(newvalue)
-    #print(newlist)
-    tester2[testnumber].update({"scores":newlist})
-    print(tester2)
-    jsonholder = json.dumps(tester2)
-    main()
+
+    def overlap1():
+        global naming
+        global testnumber
+        check = input("this assignment already exists, would you like to erase it? ")
+        if check == "yes":
+            for x in tester2:
+                if naming == tester2[x]['name']:
+                    #print(tester2)
+                    ok = x
+                    continue
+                else:
+                    #print("hi")
+                    continue
+            testnumber = ok
+            #print(testnumber)
+            del tester2[ok]
+            #print(tester2)
+        elif check == "no":
+            main()
+        else:
+            print("\ninvalid answer, please type yes or no")
+            overlap1()
+        #print(testnumber)
+        makenew()
+
+    def makenew():
+        newlist = []
+        global naming
+        global testnumber
+        global tester2
+        makevalue = input("Enter in Assignment Value:")
+        try:
+            makevalue = int(makevalue)
+        except:
+            print("invalid input, try again:")
+            makenew()
+        makevalue = int(makevalue)
+        tester2.update({testnumber:{}})
+        #print(tester2)
+        tester2[testnumber].update({"value":makevalue})
+        tester2[testnumber].update({"name":naming})
+        print(f'Enter in the scores for {makevalue} students for {naming}:')
+        for x in range(makevalue):
+            cool = x + 1
+            newvalue = input(f"{cool}: ")
+            newlist.append(newvalue)
+        #print(newlist)
+        tester2[testnumber].update({"scores":newlist})
+        print(tester2)
+        jsonholder = json.dumps(tester2)
+        main()
 
 def option2():
     extra = False
@@ -178,25 +180,25 @@ def option2():
     if extra == False:
         print("that id does not exist")
     main()
-        
-    
 
 def option3():
     global tester2
-    tester2 = dict(sorted(tester2.items()))
-    print(tester2)
+    for x in tester2:
+        x = str(x)
+    #print(tester2)
     finallist = []
     for x in tester2:
+        tester2[x]['value'] = str(tester2[x]['value'])
         final = ""
-        print(tester2[x])
+        #print(tester2[x])
         final = final + tester2[x]['value']
         final = final + ',' + tester2[x]['name']
         for y in tester2[x]['scores']:
             final = final + ',' + y
-        print(final)
+        #print(final)
         finallist.append(final)
-    print(finallist)
-    with open('data.csv', 'w') as csv_file:  
+    #print(finallist)
+    with open('data.csv', 'w') as csv_file:
         writer = csv.writer(csv_file)
         for x in finallist:
             csv_file.write(x)
