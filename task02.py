@@ -68,6 +68,10 @@ thisdict = {}
 testnumber = 0
 numberlist = []
 
+test1 = 0
+test2 = ""
+test3 = []
+
 with open('data.csv', 'r') as file:
     reader = csv.reader(file)
     data = list(reader)
@@ -91,119 +95,42 @@ with open('data.csv', 'r') as file:
         print("")
     jsonholder = json.dumps(tester2)
 
-class maker:
-    
-
-    def option1():
-        global naming
-        naming = input("Enter the assignment name: ")
-        for x in tester2:
-            #print(tester2[x]['name'])
-            if naming == tester2[x]['name']:
-                overlap1()
-                return
-            else:
-                continue
-        makenew()
-
-    def overlap1():
-        global naming
-        global testnumber
-        check = input("this assignment already exists, would you like to erase it? ")
-        if check == "yes":
-            for x in tester2:
-                if naming == tester2[x]['name']:
-                    #print(tester2)
-                    ok = x
-                    continue
-                else:
-                    #print("hi")
-                    continue
-            testnumber = ok
-            #print(testnumber)
-            del tester2[ok]
-            #print(tester2)
-        elif check == "no":
-            main()
-        else:
-            print("\ninvalid answer, please type yes or no")
-            overlap1()
-        #print(testnumber)
-        makenew()
-
-    def makenew():
-        newlist = []
-        global naming
-        global testnumber
-        global tester2
-        makevalue = input("Enter in Assignment Value:")
-        try:
-            makevalue = int(makevalue)
-        except:
-            print("invalid input, try again:")
-            makenew()
-        makevalue = int(makevalue)
-        tester2.update({testnumber:{}})
-        #print(tester2)
-        tester2[testnumber].update({"value":makevalue})
-        tester2[testnumber].update({"name":naming})
-        print(f'Enter in the scores for {makevalue} students for {naming}:')
-        for x in range(makevalue):
-            cool = x + 1
-            newvalue = input(f"{cool}: ")
-            newlist.append(newvalue)
-        #print(newlist)
-        tester2[testnumber].update({"scores":newlist})
-        print(tester2)
-        jsonholder = json.dumps(tester2)
-        main()
-
-def option2():
-    extra = False
-    global tester2
-    newlist = []
-    asking = input("Enter in the assignment ID:")
+def option1():
+    test1 = 0
+    test2 = ""
+    test3 = []
+    global naming
+    naming = input("Enter the assignment name: ")
     for x in tester2:
-        letssee = x
-        if asking == letssee:
-            extra = True
-            makevalue = tester2[x]['value']
-            makevalue = int(makevalue)
-            tester2[x].pop('scores')
-            for y in range(makevalue):
-                cool = y + 1
-                newvalue = input(f"{cool}: ")
-                newlist.append(newvalue)
-            tester2[x].update({"scores":newlist})
+        #print(tester2[x]['name'])
+        if naming == tester2[x]['name']:
+            test1 = tester2[x]['value']
+            test2 = tester2[x]['name']
+            test3 = tester2[x]['scores']
+            same = True
+            resting = maker(test1,test2,test3)
+            return
         else:
             continue
-    if extra == False:
-        print("that id does not exist")
-    main()
+    resting = resting = maker(test1,test2,test3)
+
+class maker:
+    value = 0
+    name = ""
+    scores = []
+
+    def __init__(self,a,b,c):
+        self.value = a
+        self.name = b
+        self.scores = c
+        pass
+        self.throttle()
+
+def option2():
+    print("")
 
 def option3():
-    global tester2
-    for x in tester2:
-        x = str(x)
-    #print(tester2)
-    finallist = []
-    for x in tester2:
-        tester2[x]['value'] = str(tester2[x]['value'])
-        final = ""
-        #print(tester2[x])
-        final = final + tester2[x]['value']
-        final = final + ',' + tester2[x]['name']
-        for y in tester2[x]['scores']:
-            final = final + ',' + y
-        #print(final)
-        finallist.append(final)
-    #print(finallist)
-    with open('data.csv', 'w') as csv_file:
-        writer = csv.writer(csv_file)
-        for x in finallist:
-            csv_file.write(x)
-            csv_file.write('\n')
-            print(x)
+    print("")
 
 def main():
     print("\n1. Create an Assignment \n2. Enter in Assignment Scores \n3. Write your data to file")
@@ -217,6 +144,3 @@ def main():
     else:
         print("\ninvalid choice, try again:")
         main()
-
-if __name__ == "__main__":
-    main()
