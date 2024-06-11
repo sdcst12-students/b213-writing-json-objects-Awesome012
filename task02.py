@@ -90,7 +90,7 @@ with open('data.csv', 'r') as file:
             #print(testnumber)
         tester = json.dumps(thisdict)
         tester2 = json.loads(tester)
-        #print(tester2)
+        print(tester2)
     except:
         print("")
     jsonholder = json.dumps(tester2)
