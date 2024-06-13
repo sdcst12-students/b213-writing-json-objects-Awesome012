@@ -1,27 +1,41 @@
-class car:
+class game:
+    guess = 0
 
-    make = ""
-    year = 0
-    model = ""
-    body = {
-        'style': "",
-        'color' : ""
-    }
+    def checkInteger(self,x):
+        # if x is an integer return true
+        # else return false
+        return True
 
-    def startcar(self):
-        pass
+    def askInput(self):
+        x = ""
+        while self.checkInteger(x):
+            x = input("enter a number")
+            try:
+                x = int(x)
+            except:
+                print("that is not number")
+        return x
+
+    def checkVale(self):
+        # check to see if guess is too high or low
+        if self.guess > self.secretNumber:
+            return 1
+        elif self.guess < self.secretNumber:
+            return -1
+        else:
+            return 0
+
+    def intstructions(self):
         pass
 
-    def throttle(self):
-        pass
-        pass
+    def main(self):
+        self.instructions()
+        self.guess = self.askInput()
+        self.checkVale()
 
-    def __init__(self,a,b,c):
-        self.make = a
-        self.year = b
-        self.model = c
-        pass
-        self.throttle()
+    def __init__(self):
+        self.secretNumber = 20
 
-myCar = car('Honda',2020,'CRX')
-print(myCar.make)
+
+myGame = game()
+print(myGame.secretNumber)
