@@ -215,29 +215,47 @@ class cool:
         self.main()
 
     def option5(self):
+        check = input("Enter in id or press 'all' to see scores. or type 'id' to see list of ids: ")
         for x in tester2:
-            print(f"{tester2[x]['name']}: {tester2[x]['scores']}")
-
-
+            if check == x:
+                testnumber = 1
+                print(f"[id:{x}] {tester2[x]['name']}: ")
+                for y in tester2[x]['scores']:
+                    print(f"{testnumber}. {y}")
+                    testnumber = testnumber + 1
+                extra = input("press enter to go back to menu")
+                self.main()
+            elif check == "all":
+                    testnumber = 1
+                    print(f"[id:{x}] {tester2[x]['name']}: ")
+                    for y in tester2[x]['scores']:
+                        print(f"{testnumber}. {y}")
+                        testnumber = testnumber + 1
+            elif check == "id":
+                print(f"[id:{x}] {tester2[x]['name']}: ")
+        print("id does not exist or invalid input")
+        extra = input("press enter to go back to menu")
+        self.main()
+        
     def main(self):
-        print("\n1. Create an Assignment \n2. Enter in Assignment Scores \n3. Write your data to file\n4. Delete An Assignment\n5.Show Data")
+        print("\n1. Show Assignments + Data\n2. Create an Assignment \n3. Enter/Edit Assignment Scores\n4. Delete An Assignment \n5. Write your data to file\n")
         choice = input("Enter in Your Choice: ")
         if choice == "1":
-            self.option1()
+            self.option5()
         elif choice == "2":
-            self.option2()
+            self.option1()
         elif choice == "3":
-            self.option3()
+            self.option2()
         elif choice == "4":
             self.option4()
         elif choice == "5":
-            self.option5()
+            self.option3()
         else:
             print("\ninvalid choice, try again:")
             self.main()
 
     def __init__(self):
-        self.option5()
+        self.main()
 
 if __name__ == "__main__":
     tester3 = cool()
