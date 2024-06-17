@@ -204,7 +204,7 @@ class cool:
         self.main()
 
     def option5(self):
-        check = input("Enter in id, press 'all' to see all scores. or type 'ids' to see list of ids: ")
+        check = input("Enter in id, type 'all' to see all scores. or type 'ids' to see list of ids: ")
         for x in tester2:
             if check == x:
                 testnumber = 1
