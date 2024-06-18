@@ -90,6 +90,7 @@ with open('data.csv', 'r') as file:
 class cool:
     def option1(self):
         global naming
+        print("---------------------------")
         naming = input("Enter the assignment name: ")
         for x in tester2:
             if naming == tester2[x]['name']:
@@ -102,6 +103,7 @@ class cool:
     def overlap1(self):
         global naming
         global testnumber
+        print("---------------------------")
         check = input("this assignment already exists, would you like to erase it? ")
         if check == "yes":
             for x in tester2:
@@ -120,6 +122,7 @@ class cool:
         self.makenew()
 
     def makenew(self):
+        number = 1
         newlist = []
         global naming
         global testnumber
@@ -142,6 +145,10 @@ class cool:
         tester2[testnumber].update({"scores":newlist})
         print(tester2)
         jsonholder = json.dumps(tester2)
+        print(f"---------------------------\n[id:{testnumber}] {naming} ")
+        for y in tester2[testnumber]['scores']:
+            print(f"{number}. {y}")
+            number = number + 1
         self.main()
 
     def option2(self):
@@ -204,29 +211,34 @@ class cool:
         self.main()
 
     def option5(self):
+        cool = False
+        print("---------------------------")
         check = input("type in an id (ie: '1') to see the scores of that assignment \ntype 'all' to show all assignments and scores\ntype 'ids' to see all the assignment names and their ids: ")
         for x in tester2:
             if check == x:
                 testnumber = 1
-                print(f"[id:{x}] {tester2[x]['name']} ")
+                print(f"---------------------------\n[id:{x}] {tester2[x]['name']} ")
                 for y in tester2[x]['scores']:
                     print(f"{testnumber}. {y}")
                     testnumber = testnumber + 1
-                extra = input("press enter to go back to menu")
-                self.main()
+                cool = True
             elif check == "all":
-                    testnumber = 1
-                    print(f"[id:{x}] {tester2[x]['name']} ")
-                    for y in tester2[x]['scores']:
-                        print(f"{testnumber}. {y}")
-                        testnumber = testnumber + 1
+                testnumber = 1
+                print(f"---------------------------\n[id:{x}] {tester2[x]['name']} ")
+                for y in tester2[x]['scores']:
+                    print(f"{testnumber}. {y}")
+                    testnumber = testnumber + 1
+                cool = True
             elif check == "ids":
-                print(f"[id:{x}] {tester2[x]['name']} ")
+                print(f"---------------------------\n[id:{x}] {tester2[x]['name']} ")
+                cool = True
+        if cool != True:
+            print("\n invalid input")
         extra = input("press enter to go back to menu")
         self.main()
         
     def main(self):
-        print("\n1. Show Assignments + Data\n2. Create an Assignment \n3. Enter/Edit Assignment Scores\n4. Delete An Assignment \n5. Write your data to file\n")
+        print("---------------------------\n1. Show Assignments + Data\n2. Create an Assignment \n3. Enter/Edit Assignment Scores\n4. Delete An Assignment \n5. Write your data to file\n---------------------------")
         choice = input("Enter in Your Choice: ")
         if choice == "1":
             self.option5()
