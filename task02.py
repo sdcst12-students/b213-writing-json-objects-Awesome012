@@ -204,11 +204,11 @@ class cool:
         self.main()
 
     def option5(self):
-        check = input("Enter in id, type 'all' to see all scores. or type 'ids' to see list of ids: ")
+        check = input("type in an id (ie: '1') to see the scores of that assignment \ntype 'all' to show all assignments and scores\ntype 'ids' to see all the assignment names and their ids: ")
         for x in tester2:
             if check == x:
                 testnumber = 1
-                print(f"[id:{x}] {tester2[x]['name']}: ")
+                print(f"[id:{x}] {tester2[x]['name']} ")
                 for y in tester2[x]['scores']:
                     print(f"{testnumber}. {y}")
                     testnumber = testnumber + 1
@@ -216,12 +216,12 @@ class cool:
                 self.main()
             elif check == "all":
                     testnumber = 1
-                    print(f"[id:{x}] {tester2[x]['name']}: ")
+                    print(f"[id:{x}] {tester2[x]['name']} ")
                     for y in tester2[x]['scores']:
                         print(f"{testnumber}. {y}")
                         testnumber = testnumber + 1
             elif check == "ids":
-                print(f"[id:{x}] {tester2[x]['name']}: ")
+                print(f"[id:{x}] {tester2[x]['name']} ")
         extra = input("press enter to go back to menu")
         self.main()
         
